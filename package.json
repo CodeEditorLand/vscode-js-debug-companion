@@ -1,21 +1,33 @@
 {
+  "name": "js-debug-companion",
+  "displayName": "JavaScript Debugger Companion Extension",
+  "version": "1.1.2",
+  "description": "Companion extension to js-debug that provides capability for remote debugging",
+  "homepage": "https://github.com/microsoft/vscode-js-debug-companion#readme",
+  "bugs": {
+    "url": "https://github.com/microsoft/vscode-js-debug-companion/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/microsoft/vscode-js-debug-companion.git"
+  },
+  "license": "MIT",
+  "author": "Connor Peet <connor@peet.io>",
+  "publisher": "ms-vscode",
+  "main": "./out/extension.js",
+  "scripts": {
+    "compile": "node .esbuild.js --minify",
+    "fmt": "prettier --write \"src/**/*.ts\"&& npm run test:lint -- --fix",
+    "test:fmt": "prettier --list-different \"src/**/*.ts\"",
+    "vscode:prepublish": "rimraf out && node .esbuild.js --minify",
+    "watch": "node .esbuild.js --watch"
+  },
+  "contributes": {},
   "activationEvents": [
     "onCommand:js-debug-companion.launchAndAttach",
     "onCommand:js-debug-companion.kill",
     "onCommand:js-debug-companion.launch"
   ],
-  "api": "none",
-  "author": "Connor Peet <connor@peet.io>",
-  "bugs": {
-    "url": "https://github.com/microsoft/vscode-js-debug-companion/issues"
-  },
-  "capabilities": {
-    "untrustedWorkspaces": {
-      "supported": true
-    },
-    "virtualWorkspaces": false
-  },
-  "contributes": {},
   "dependencies": {
     "@vscode/js-debug-browsers": "1.1.0",
     "duplexer3": "1.0.0",
@@ -23,7 +35,6 @@
     "split2": "4.2.0",
     "ws": "8.13.0"
   },
-  "description": "Companion extension to js-debug that provides capability for remote debugging",
   "devDependencies": {
     "@types/duplexer3": "0.1.1",
     "@types/mocha": "9.1.0",
@@ -35,26 +46,15 @@
     "rimraf": "3.0.2",
     "typescript": "4.6.2"
   },
-  "displayName": "JavaScript Debugger Companion Extension",
+  "icon": "resources/logo.png",
+  "api": "none",
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": true
+    },
+    "virtualWorkspaces": false
+  },
   "extensionKind": [
     "ui"
-  ],
-  "homepage": "https://github.com/microsoft/vscode-js-debug-companion#readme",
-  "icon": "resources/logo.png",
-  "license": "MIT",
-  "main": "./out/extension.js",
-  "name": "js-debug-companion",
-  "publisher": "ms-vscode",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/microsoft/vscode-js-debug-companion.git"
-  },
-  "scripts": {
-    "compile": "node .esbuild.js --minify",
-    "fmt": "prettier --write \"src/**/*.ts\"&& npm run test:lint -- --fix",
-    "test:fmt": "prettier --list-different \"src/**/*.ts\"",
-    "vscode:prepublish": "rimraf out && node .esbuild.js --minify",
-    "watch": "node .esbuild.js --watch"
-  },
-  "version": "1.1.2"
+  ]
 }
