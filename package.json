@@ -1,32 +1,45 @@
 {
+	"name": "js-debug-companion",
+	"displayName": "JavaScript Debugger Companion Extension",
+	"version": "0.0.1",
+	"private": false,
+	"description": "Companion extension to js-debug that provides capability for remote debugging",
+	"keywords": [
+		"land"
+	],
+	"homepage": "HTTPS://GitHub.Com/CodeEditorLand/LandJSDebugCompanion#readme",
+	"bugs": {
+		"url": "HTTPS://GitHub.Com/CodeEditorLand/LandJSDebugCompanion/issues"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+HTTPS://github.com/CodeEditorLand/LandJSDebugCompanion.git"
+	},
+	"license": "SEE LICENSE IN LICENSE",
+	"author": {
+		"name": "🌆 — Land —",
+		"email": "Land@PlayForm.Cloud",
+		"url": "HTTPS://Land.PlayForm.Cloud"
+	},
+	"type": "module",
+	"main": "./out/extension.js",
+	"scripts": {
+		"Document": "Document 'Source/**/*.ts'",
+		"compile": "node .esbuild.js --minify",
+		"prepublishOnly": "Build 'Source/**/*.ts'"
+	},
+	"contributes": {},
 	"activationEvents": [
 		"onCommand:js-debug-companion.launchAndAttach",
 		"onCommand:js-debug-companion.kill",
 		"onCommand:js-debug-companion.launch"
 	],
-	"api": "none",
-	"author": {
-		"email": "Land@PlayForm.Cloud",
-		"name": "🌆 — Land —",
-		"url": "HTTPS://Land.PlayForm.Cloud"
-	},
-	"bugs": {
-		"url": "HTTPS://GitHub.Com/CodeEditorLand/LandJSDebugCompanion/issues"
-	},
-	"capabilities": {
-		"untrustedWorkspaces": {
-			"supported": true
-		},
-		"virtualWorkspaces": false
-	},
-	"contributes": {},
 	"dependencies": {
 		"duplexer3": "1.0.0",
 		"execa": "8.0.1",
 		"split2": "4.2.0",
 		"ws": "8.17.0"
 	},
-	"description": "Companion extension to js-debug that provides capability for remote debugging",
 	"devDependencies": {
 		"@playform/build": "0.0.7",
 		"@playform/document": "0.0.6",
@@ -37,31 +50,18 @@
 		"esbuild": "0.20.2",
 		"rimraf": "5.0.5"
 	},
-	"displayName": "JavaScript Debugger Companion Extension",
-	"extensionKind": [
-		"ui"
-	],
-	"homepage": "HTTPS://GitHub.Com/CodeEditorLand/LandJSDebugCompanion#readme",
-	"icon": "resources/logo.png",
-	"keywords": [
-		"land"
-	],
-	"license": "SEE LICENSE IN LICENSE",
-	"main": "./out/extension.js",
-	"name": "js-debug-companion",
-	"private": false,
 	"publishConfig": {
 		"access": "public"
 	},
-	"repository": {
-		"type": "git",
-		"url": "git+HTTPS://github.com/CodeEditorLand/LandJSDebugCompanion.git"
+	"icon": "resources/logo.png",
+	"api": "none",
+	"capabilities": {
+		"untrustedWorkspaces": {
+			"supported": true
+		},
+		"virtualWorkspaces": false
 	},
-	"scripts": {
-		"Document": "Document 'Source/**/*.ts'",
-		"compile": "node .esbuild.js --minify",
-		"prepublishOnly": "Build 'Source/**/*.ts'"
-	},
-	"type": "module",
-	"version": "0.0.1"
+	"extensionKind": [
+		"ui"
+	]
 }
