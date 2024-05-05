@@ -4,27 +4,29 @@
 	"version": "0.0.1",
 	"private": false,
 	"description": "Companion extension to js-debug that provides capability for remote debugging",
-	"homepage": "https://github.com/CodeEditorLand/Foundation#readme",
+	"keywords": [
+		"land"
+	],
+	"homepage": "HTTPS://GitHub.Com/CodeEditorLand/LandJSDebugCompanion#readme",
 	"bugs": {
-		"url": "https://github.com/CodeEditorLand/Foundation/issues"
+		"url": "HTTPS://GitHub.Com/CodeEditorLand/LandJSDebugCompanion/issues"
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/CodeEditorLand/Foundation.git"
+		"url": "git+HTTPS://github.com/CodeEditorLand/LandJSDebugCompanion.git"
 	},
 	"license": "SEE LICENSE IN LICENSE",
 	"author": {
-		"name": "Playform",
-		"email": "Hello@Playform.Cloud",
-		"url": "https://playform.cloud"
+		"name": "🌆 — Land —",
+		"email": "Land@PlayForm.Cloud",
+		"url": "HTTPS://Land.PlayForm.Cloud"
 	},
 	"type": "module",
 	"main": "./out/extension.js",
 	"scripts": {
+		"Document": "Document 'Source/**/*.ts'",
 		"compile": "node .esbuild.js --minify",
-		"prepublishOnly": "TypeScriptESBuild 'Source/**/*.ts'",
-		"vscode:prepublish": "rimraf out && node .esbuild.js --minify",
-		"watch": "node .esbuild.js --watch"
+		"prepublishOnly": "Build 'Source/**/*.ts'"
 	},
 	"contributes": {},
 	"activationEvents": [
@@ -33,23 +35,20 @@
 		"onCommand:js-debug-companion.launch"
 	],
 	"dependencies": {
-		"@vscode/js-debug-browsers": "1.1.2",
 		"duplexer3": "1.0.0",
 		"execa": "8.0.1",
 		"split2": "4.2.0",
-		"ws": "8.16.0"
+		"ws": "8.17.0"
 	},
 	"devDependencies": {
+		"@playform/build": "0.0.7",
+		"@playform/document": "0.0.6",
 		"@types/duplexer3": "0.1.4",
-		"@types/mocha": "10.0.6",
-		"@types/node": "20.11.30",
+		"@types/node": "20.12.7",
 		"@types/split2": "4.2.3",
-		"@types/vscode": "1.87.0",
 		"@types/ws": "8.5.10",
 		"esbuild": "0.20.2",
-		"rimraf": "5.0.5",
-		"typescript": "5.4.2",
-		"typescript-esbuild": "0.4.5"
+		"rimraf": "5.0.5"
 	},
 	"publishConfig": {
 		"access": "public"
