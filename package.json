@@ -14,17 +14,17 @@
 	],
 	"dependencies": {
 		"duplexer3": "1.0.0",
-		"execa": "5.1.1",
+		"execa": "9.1.0",
 		"split2": "4.2.0",
-		"ws": "8.13.0"
+		"ws": "8.17.0"
 	},
 	"devDependencies": {
-		"@types/duplexer3": "0.1.1",
-		"@types/node": "17.0.21",
-		"@types/split2": "3.2.1",
-		"@types/ws": "8.5.2",
-		"esbuild": "0.18.11",
-		"rimraf": "3.0.2"
+		"@types/duplexer3": "0.1.4",
+		"@types/node": "20.12.12",
+		"@types/split2": "4.2.3",
+		"@types/ws": "8.5.10",
+		"esbuild": "0.21.3",
+		"rimraf": "5.0.7"
 	},
 	"icon": "resources/logo.png",
 	"api": "none",
