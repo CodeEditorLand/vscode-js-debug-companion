@@ -23,7 +23,7 @@
 		"@types/node": "20.12.12",
 		"@types/split2": "4.2.3",
 		"@types/ws": "8.5.10",
-		"esbuild": "0.21.3",
+		"esbuild": "0.21.4",
 		"rimraf": "5.0.7"
 	},
 	"icon": "resources/logo.png",
