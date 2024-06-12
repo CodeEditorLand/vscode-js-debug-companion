@@ -13,19 +13,19 @@
 	},
 	"contributes": {},
 	"dependencies": {
-		"duplexer3": "^1.0.0",
-		"execa": "^9.2.0",
-		"split2": "^4.2.0",
-		"ws": "^8.17.0"
+		"duplexer3": "1.0.0",
+		"execa": "9.2.0",
+		"split2": "4.2.0",
+		"ws": "8.17.0"
 	},
 	"description": "Companion extension to js-debug that provides capability for remote debugging",
 	"devDependencies": {
-		"@types/duplexer3": "^0.1.4",
-		"@types/node": "^20.14.2",
-		"@types/split2": "^4.2.3",
-		"@types/ws": "^8.5.10",
-		"esbuild": "^0.21.5",
-		"rimraf": "^5.0.7"
+		"@types/duplexer3": "0.1.4",
+		"@types/node": "20.14.2",
+		"@types/split2": "4.2.3",
+		"@types/ws": "8.5.10",
+		"esbuild": "0.21.5",
+		"rimraf": "5.0.7"
 	},
 	"displayName": "JavaScript Debugger Companion Extension",
 	"extensionKind": [
