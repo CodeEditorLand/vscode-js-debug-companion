@@ -1,18 +1,18 @@
 {
-	"name": "js-debug-companion",
-	"displayName": "JavaScript Debugger Companion Extension",
-	"description": "Companion extension to js-debug that provides capability for remote debugging",
-	"main": "./out/extension.js",
-	"scripts": {
-		"compile": "node .esbuild.js --minify"
-	},
-	"contributes": {},
 	"activationEvents": [
 		"onCommand:js-debug-companion.launchAndAttach",
 		"onCommand:js-debug-companion.kill",
 		"onCommand:js-debug-companion.launch",
 		"onCommand:js-debug-companion.defaultBrowser"
 	],
+	"api": "none",
+	"capabilities": {
+		"untrustedWorkspaces": {
+			"supported": true
+		},
+		"virtualWorkspaces": false
+	},
+	"contributes": {},
 	"dependencies": {
 		"default-browser": "^5.2.1",
 		"duplexer3": "^1.0.0",
@@ -20,6 +20,7 @@
 		"split2": "^4.2.0",
 		"ws": "^8.17.1"
 	},
+	"description": "Companion extension to js-debug that provides capability for remote debugging",
 	"devDependencies": {
 		"@types/duplexer3": "^0.1.4",
 		"@types/eslint__js": "^8.42.3",
@@ -29,15 +30,14 @@
 		"esbuild": "^0.22.0",
 		"rimraf": "^5.0.7"
 	},
-	"icon": "resources/logo.png",
-	"api": "none",
-	"capabilities": {
-		"untrustedWorkspaces": {
-			"supported": true
-		},
-		"virtualWorkspaces": false
-	},
+	"displayName": "JavaScript Debugger Companion Extension",
 	"extensionKind": [
 		"ui"
-	]
+	],
+	"icon": "resources/logo.png",
+	"main": "./out/extension.js",
+	"name": "js-debug-companion",
+	"scripts": {
+		"compile": "node .esbuild.js --minify"
+	}
 }
