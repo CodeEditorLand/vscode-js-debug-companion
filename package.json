@@ -16,7 +16,7 @@
 	"dependencies": {
 		"default-browser": "5.2.1",
 		"duplexer3": "1.0.0",
-		"execa": "9.4.0",
+		"execa": "9.4.1",
 		"split2": "4.2.0",
 		"ws": "8.18.0"
 	},
@@ -24,7 +24,7 @@
 	"devDependencies": {
 		"@types/duplexer3": "0.1.4",
 		"@types/eslint__js": "8.42.3",
-		"@types/node": "22.7.5",
+		"@types/node": "22.7.6",
 		"@types/split2": "4.2.3",
 		"@types/ws": "8.5.12",
 		"esbuild": "0.24.0",
