@@ -26,6 +26,7 @@ export async function retryGetWSEndpoint(
 		}
 
 		await new Promise((r) => setTimeout(r, 200));
+
 		return retryGetWSEndpoint(browserURL, cancellationToken);
 	}
 }
@@ -109,7 +110,9 @@ function fetchHttp(url: string, cancellationToken: CancellationToken) {
 
 function fixRemoteUrl(rawBrowserUrl: string, rawWebSocketUrl: string) {
 	const browserUrl = new URL(rawBrowserUrl);
+
 	const websocketUrl = new URL(rawWebSocketUrl);
 	websocketUrl.host = browserUrl.host;
+
 	return websocketUrl.toString();
 }

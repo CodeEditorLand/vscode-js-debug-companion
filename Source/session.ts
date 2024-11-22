@@ -32,6 +32,7 @@ class MessageQueue<T> {
 
 		const prev = this.qOrFn;
 		this.qOrFn = fn;
+
 		for (const queued of prev) {
 			fn(queued);
 		}
@@ -70,7 +71,9 @@ export class Session implements Disposable {
 		wslInfo?: IWslInfo,
 	) {
 		const url = new URL(`ws://${host}:${port}${path}`);
+
 		const deadline = Date.now() + 5000;
+
 		if (wslInfo) {
 			this.attachSocketWsl(url, wslInfo, deadline);
 		} else {
@@ -84,6 +87,7 @@ export class Session implements Disposable {
 	public attachChild(target: ITarget) {
 		if (this.disposed) {
 			target.dispose();
+
 			return;
 		}
 
@@ -161,6 +165,7 @@ export class Session implements Disposable {
 		socket.on("open", () => {
 			if (this.disposed) {
 				socket.close();
+
 				return;
 			}
 
@@ -184,6 +189,7 @@ export class Session implements Disposable {
 
 const makeNetSocketFromDuplexStream = (stream: Duplex): Socket => {
 	const cast = stream as Socket;
+
 	const patched: { [K in keyof Omit<Socket, keyof Duplex>]: Socket[K] } = {
 		bufferSize: 0,
 		bytesRead: 0,
@@ -211,6 +217,7 @@ const makeNetSocketFromDuplexStream = (stream: Duplex): Socket => {
 		setNoDelay: () => cast,
 		setTimeout: (_timeout: number, callback?: () => void) => {
 			callback?.();
+
 			return cast;
 		},
 	};

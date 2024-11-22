@@ -22,7 +22,9 @@ import { exists } from "./fs";
 import { PipedTarget, ServerTarget } from "./target";
 
 const debugPortPrefix = "--remote-debugging-port=";
+
 const debugPipeArg = "--remote-debugging-port=";
+
 const availableBrowserKey = "availableBrowsers_";
 
 export class BrowserSpawner {
@@ -107,6 +109,7 @@ export class BrowserSpawner {
 				(await finder.findWhere(
 					(r) => r.quality === /* Quality.Stable */ "stable",
 				)) || (await finder.findAll())[0];
+
 			return found?.path;
 		} else if (isQuality(executablePath)) {
 			return (await finder.findWhere((r) => r.quality === executablePath))
@@ -118,6 +121,7 @@ export class BrowserSpawner {
 
 	private async getUserDataDir(params: ILaunchParams) {
 		const requested = params.params.userDataDir;
+
 		if (requested === false) {
 			return;
 		}
@@ -170,6 +174,7 @@ export class BrowserSpawner {
 		);
 
 		const args = params.browserArgs.slice();
+
 		const userDataDir = await this.getUserDataDir(params);
 		// prepend args to not interfere with any positional arguments (e.g. url to open)
 		if (userDataDir !== undefined) {
@@ -180,6 +185,7 @@ export class BrowserSpawner {
 		// this probably won't exist on the local host. If it doesn't just set it
 		// to the process' cwd.
 		let cwd = params.params.cwd || params.params.webRoot;
+
 		if (!cwd || !(await exists(cwd))) {
 			cwd = process.cwd();
 		}
@@ -187,6 +193,7 @@ export class BrowserSpawner {
 		const port = args
 			.find((a) => a.startsWith(debugPortPrefix))
 			?.slice(debugPortPrefix.length);
+
 		if (!port) {
 			return new PipedTarget(
 				spawn(binary, args, {

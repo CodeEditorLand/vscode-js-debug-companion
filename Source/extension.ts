@@ -55,6 +55,7 @@ export function activate(context: vscode.ExtensionContext) {
 			"js-debug-companion.defaultBrowser",
 			async () => {
 				const b = await defaultBrowser();
+
 				return b.name;
 			},
 		),

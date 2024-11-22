@@ -57,6 +57,7 @@ export class PipedTarget implements ITarget {
 
 	public send(message: WebSocket.RawData): void {
 		const w = this.process.stdio[3] as NodeJS.WritableStream;
+
 		if (message instanceof Uint8Array) {
 			w.write(message);
 		} else if (message instanceof ArrayBuffer) {
@@ -90,12 +91,14 @@ export class AttachTarget implements ITarget {
 
 	public static async create(host: string, port: number) {
 		const cts = new CancellationTokenSource();
+
 		setTimeout(() => cts.cancel(), 10 * 1000);
 
 		const endpoint = await retryGetWSEndpoint(
 			`http://${host}:${port}`,
 			cts.token,
 		);
+
 		const ws = new WebSocket(endpoint, [], {
 			headers: { host: "localhost" },
 			perMessageDeflate: false,
@@ -144,12 +147,16 @@ export class ServerTarget implements ITarget {
 
 	public static async create(child: ChildProcess, port: number) {
 		const cts = new CancellationTokenSource();
+
 		setTimeout(() => cts.cancel(), 10 * 1000);
+
 		try {
 			const target = await AttachTarget.create("localhost", port);
+
 			return new ServerTarget(child, target);
 		} catch (e) {
 			child.kill();
+
 			throw e;
 		}
 	}
