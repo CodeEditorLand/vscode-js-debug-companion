@@ -16,27 +16,40 @@ import { BrowserSpawner } from "./spawn";
  */
 export interface IWslInfo {
 	execPath: string;
+
 	distro: string;
+
 	user: string;
 }
 
 export interface ILaunchParams {
 	type: "chrome" | "edge";
+
 	path: string;
+
 	proxyUri: string;
+
 	launchId: number;
+
 	browserArgs: string[];
+
 	wslInfo?: IWslInfo;
+
 	attach?: {
 		host: string;
+
 		port: number;
 	};
 	// See IChromiumLaunchConfiguration in js-debug for the full type, a subset of props are here:
 	params: {
 		env: Readonly<{ [key: string]: string | null }>;
+
 		runtimeExecutable: string;
+
 		userDataDir: boolean | string;
+
 		cwd: string | null;
+
 		webRoot: string | null;
 	};
 }
@@ -48,6 +61,7 @@ export function activate(context: vscode.ExtensionContext) {
 		context.storageUri?.fsPath ?? tmpdir(),
 		context,
 	);
+
 	manager = new SessionManager(browserSpawner);
 
 	context.subscriptions.push(
@@ -86,5 +100,6 @@ export function activate(context: vscode.ExtensionContext) {
 
 export function deactivate() {
 	manager?.dispose();
+
 	manager = undefined;
 }

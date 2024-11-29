@@ -152,6 +152,7 @@ export class BrowserSpawner {
 		url: string,
 	) {
 		const binary = await this.findBrowserPath(type, "*");
+
 		spawn(binary, [url], {
 			detached: true,
 			stdio: "ignore",

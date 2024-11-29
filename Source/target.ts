@@ -11,10 +11,13 @@ import { retryGetWSEndpoint } from "./getWsEndpoint";
 
 export interface ITarget {
 	readonly onMessage: Event<WebSocket.RawData>;
+
 	readonly onError: Event<Error>;
+
 	readonly onClose: Event<void>;
 
 	send(message: WebSocket.RawData): void;
+
 	dispose(): Promise<void>;
 }
 
@@ -34,11 +37,15 @@ const waitForExit = async (process: ChildProcess) => {
  */
 export class PipedTarget implements ITarget {
 	private errorEmitter = new EventEmitter<Error>();
+
 	private closeEmitter = new EventEmitter<void>();
+
 	private messageEmitter = new EventEmitter<WebSocket.RawData>();
 
 	public readonly onError = this.errorEmitter.event;
+
 	public readonly onClose = this.closeEmitter.event;
+
 	public readonly onMessage = this.messageEmitter.event;
 
 	constructor(private readonly process: ChildProcess) {
@@ -47,6 +54,7 @@ export class PipedTarget implements ITarget {
 		}
 
 		process.on("error", (e) => this.errorEmitter.fire(e));
+
 		process.on("exit", () => this.closeEmitter.fire());
 
 		(process.stdio[4] as NodeJS.ReadableStream)
@@ -73,6 +81,7 @@ export class PipedTarget implements ITarget {
 
 	public async dispose() {
 		await waitForExit(this.process);
+
 		this.process.kill();
 	}
 }
@@ -82,11 +91,15 @@ export class PipedTarget implements ITarget {
  */
 export class AttachTarget implements ITarget {
 	private errorEmitter = new EventEmitter<Error>();
+
 	private closeEmitter = new EventEmitter<void>();
+
 	private messageEmitter = new EventEmitter<WebSocket.RawData>();
 
 	public readonly onError = this.errorEmitter.event;
+
 	public readonly onClose = this.closeEmitter.event;
+
 	public readonly onMessage = this.messageEmitter.event;
 
 	public static async create(host: string, port: number) {
@@ -108,6 +121,7 @@ export class AttachTarget implements ITarget {
 
 		return await new Promise<ITarget>((resolve, reject) => {
 			ws.addEventListener("open", () => resolve(new AttachTarget(ws)));
+
 			ws.addEventListener("error", (errorEvent) =>
 				reject(errorEvent.error),
 			);
@@ -116,7 +130,9 @@ export class AttachTarget implements ITarget {
 
 	protected constructor(private readonly ws: WebSocket) {
 		ws.on("error", (evt) => this.errorEmitter.fire(evt));
+
 		ws.on("close", () => this.closeEmitter.fire());
+
 		ws.on("message", (m) => this.messageEmitter.fire(m));
 	}
 
@@ -127,6 +143,7 @@ export class AttachTarget implements ITarget {
 	public async dispose() {
 		await new Promise((r) => {
 			this.ws.on("close", r);
+
 			this.ws.close();
 		});
 	}
@@ -138,11 +155,15 @@ export class AttachTarget implements ITarget {
  */
 export class ServerTarget implements ITarget {
 	private errorEmitter = new EventEmitter<Error>();
+
 	private closeEmitter = new EventEmitter<void>();
+
 	private messageEmitter = new EventEmitter<WebSocket.RawData>();
 
 	public readonly onError = this.errorEmitter.event;
+
 	public readonly onClose = this.closeEmitter.event;
+
 	public readonly onMessage = this.messageEmitter.event;
 
 	public static async create(child: ChildProcess, port: number) {
@@ -166,9 +187,13 @@ export class ServerTarget implements ITarget {
 		private readonly attach: ITarget,
 	) {
 		process.on("error", (e) => this.errorEmitter.fire(e));
+
 		process.on("close", () => this.closeEmitter.fire());
+
 		attach.onError((err) => this.errorEmitter.fire(err));
+
 		attach.onClose(() => this.closeEmitter.fire());
+
 		attach.onMessage((evt) => this.messageEmitter.fire(evt));
 	}
 
@@ -178,7 +203,9 @@ export class ServerTarget implements ITarget {
 
 	public async dispose() {
 		this.attach.dispose();
+
 		await waitForExit(this.process);
+
 		this.process.kill();
 	}
 }

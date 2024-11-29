@@ -89,9 +89,13 @@ function fetchHttp(url: string, cancellationToken: CancellationToken) {
 				);
 
 				let data = "";
+
 				response.setEncoding("utf8");
+
 				response.on("data", (chunk: string) => (data += chunk));
+
 				response.on("end", () => fulfill(data));
+
 				response.on("error", reject);
 			},
 		);
@@ -99,11 +103,13 @@ function fetchHttp(url: string, cancellationToken: CancellationToken) {
 		disposables.push(
 			cancellationToken.onCancellationRequested(() => {
 				request.destroy();
+
 				reject(new Error(`Cancelled GET ${url}`));
 			}),
 		);
 
 		request.on("error", reject);
+
 		request.end();
 	}).finally(() => disposables.forEach((d) => d.dispose()));
 }
@@ -112,6 +118,7 @@ function fixRemoteUrl(rawBrowserUrl: string, rawWebSocketUrl: string) {
 	const browserUrl = new URL(rawBrowserUrl);
 
 	const websocketUrl = new URL(rawWebSocketUrl);
+
 	websocketUrl.host = browserUrl.host;
 
 	return websocketUrl.toString();

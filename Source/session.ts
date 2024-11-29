@@ -31,6 +31,7 @@ class MessageQueue<T> {
 		}
 
 		const prev = this.qOrFn;
+
 		this.qOrFn = fn;
 
 		for (const queued of prev) {
@@ -44,20 +45,26 @@ class MessageQueue<T> {
  */
 export class Session implements Disposable {
 	private readonly errorEmitter = new EventEmitter<Error>();
+
 	public readonly onError = this.errorEmitter.event;
 
 	private readonly closeEmitter = new EventEmitter<void>();
+
 	public readonly onClose = this.closeEmitter.event;
 
 	private disposed = false;
+
 	private browserProcess?: ITarget;
+
 	private socket?: WebSocket;
 
 	private fromSocketQueue = new MessageQueue<WebSocket.RawData>();
+
 	private fromBrowserQueue = new MessageQueue<WebSocket.RawData>();
 
 	constructor() {
 		this.onClose(() => this.dispose());
+
 		this.onError(() => this.dispose());
 	}
 
@@ -92,9 +99,13 @@ export class Session implements Disposable {
 		}
 
 		this.browserProcess = target;
+
 		target.onClose(() => this.closeEmitter.fire());
+
 		target.onError((err) => this.errorEmitter.fire(err));
+
 		target.onMessage((msg) => this.fromBrowserQueue.push(msg));
+
 		this.fromSocketQueue.connect((data) => target.send(data));
 	}
 
@@ -104,7 +115,9 @@ export class Session implements Disposable {
 	public dispose() {
 		if (!this.disposed) {
 			this.browserProcess?.dispose();
+
 			this.socket?.close();
+
 			this.disposed = true;
 		}
 	}
@@ -149,6 +162,7 @@ export class Session implements Disposable {
 
 		// intentionally don't perMessageDeflate here, since we're local in wsl
 		const ws = new WebSocket(url, { agent });
+
 		this.setupSocket(ws, url, deadline);
 	}
 
@@ -158,6 +172,7 @@ export class Session implements Disposable {
 		}
 
 		const socket = new WebSocket(url, { perMessageDeflate: true });
+
 		this.setupSocket(socket, url, deadline);
 	}
 
@@ -170,10 +185,13 @@ export class Session implements Disposable {
 			}
 
 			this.socket = socket;
+
 			this.socket.on("close", () => this.closeEmitter.fire());
+
 			this.socket.on("message", (data) =>
 				this.fromSocketQueue.push(data),
 			);
+
 			this.fromBrowserQueue.connect((data) => socket.send(data));
 		});
 
@@ -211,6 +229,7 @@ const makeNetSocketFromDuplexStream = (stream: Duplex): Socket => {
 			if (connectionListener) {
 				setImmediate(connectionListener);
 			}
+
 			return cast;
 		},
 		setKeepAlive: () => cast,
