@@ -16,17 +16,17 @@
 	"dependencies": {
 		"default-browser": "5.2.1",
 		"duplexer3": "1.0.0",
-		"execa": "9.5.1",
+		"execa": "9.5.2",
 		"split2": "4.2.0",
 		"ws": "8.18.0"
 	},
 	"devDependencies": {
 		"@types/duplexer3": "0.1.4",
 		"@types/eslint__js": "8.42.3",
-		"@types/node": "22.10.1",
+		"@types/node": "22.10.5",
 		"@types/split2": "4.2.3",
 		"@types/ws": "8.5.13",
-		"esbuild": "0.24.0",
+		"esbuild": "0.24.2",
 		"rimraf": "6.0.1"
 	},
 	"icon": "resources/logo.png",
