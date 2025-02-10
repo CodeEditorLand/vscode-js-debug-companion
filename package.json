@@ -23,10 +23,10 @@
 	"devDependencies": {
 		"@types/duplexer3": "0.1.4",
 		"@types/eslint__js": "8.42.3",
-		"@types/node": "22.13.0",
+		"@types/node": "22.13.1",
 		"@types/split2": "4.2.3",
 		"@types/ws": "8.5.14",
-		"esbuild": "0.24.2",
+		"esbuild": "0.25.0",
 		"rimraf": "6.0.1"
 	},
 	"icon": "resources/logo.png",
